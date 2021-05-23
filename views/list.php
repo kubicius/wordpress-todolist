@@ -17,6 +17,7 @@
                 <div class="todolist__task">
                     <input type="checkbox">
                     <span class="todolist__taskTitle">Title</span>
+                    <span class="dashicons dashicons-edit-large"></span>
                     <span class="dashicons dashicons-trash"></span>
                 </div>
             </div>
