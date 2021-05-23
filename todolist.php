@@ -25,3 +25,30 @@ $todolistTaskControllerObj = new TodolistTaskController();
 add_action( 'admin_menu', array ( $todolistControllerObj , 'addMenuPage' ));
 register_activation_hook( __FILE__ , array ( $todolistControllerObj , 'activate' ));
 register_deactivation_hook( __FILE__ , array ( $todolistControllerObj , 'deactivate' ));
+
+// TODO: Authorization and POST checking
+if( $_GET['controller'] == 'todolist' ){
+    switch ( $_GET['action'] ){
+        case 'add' : 
+            $todolistControllerObj->addTodolist( $_POST['name'] );
+        break;
+        case 'update' : 
+            $todolistControllerObj->updateTodolist( $_POST['id'], $_POST['name'] );
+        break;
+        case 'delete' : 
+            $todolistControllerObj->deleteTodolist( $_POST['id'] );
+        break;
+    }
+}elseif( $_GET['controller'] == 'todolist-task' ){
+    switch ( $_GET['action'] ){
+        case 'add' : 
+            $todolistTaskControllerObj->addTask( $_POST['name'] );
+        break;
+        case 'update' : 
+            $todolistTaskControllerObj->updateTask( $_POST['id'], $_POST['name'] );
+        break;
+        case 'delete' : 
+            $todolistTaskControllerObj->deleteTask( $_POST['id'] );
+        break;
+    }
+}
