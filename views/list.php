@@ -1,0 +1,1 @@
+<?php include $this->viewDirectory . 'header.php' ?>
