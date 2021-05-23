@@ -2,7 +2,7 @@
 class TodolistTaskController{
 
     public function __construct(){
-        require '../Models/TodolistTask.php';
+
     }
 
     public function addTask(string $name){
@@ -16,5 +16,5 @@ class TodolistTaskController{
     public function deleteTask(int $id){
 
     }
-    
+
 }

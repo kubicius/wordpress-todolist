@@ -3,8 +3,6 @@ class TodolistController{
 
     public function __construct(){
         $this->viewDirectory = TODOLIST_PATH . "views/";
-        require '../Models/Todolist.php';
-        require '../Models/TodolistTask.php';
     }
 
     public function addMenuPage() {

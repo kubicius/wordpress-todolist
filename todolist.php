@@ -15,6 +15,10 @@ defined( 'ABSPATH' ) || exit;
 define('TODOLIST_PATH', plugin_dir_path( __FILE__ ));
 define('TODOLIST_TITLE', 'To Do List');
 
+// Loading models.
+require TODOLIST_PATH . 'Classes/Models/Todolist.php';
+require TODOLIST_PATH . 'Classes/Models/TodolistTask.php';
+
 // Initialzation of controllers.
 require TODOLIST_PATH . 'Classes/Controllers/TodolistController.php';
 $todolistControllerObj = new TodolistController();
