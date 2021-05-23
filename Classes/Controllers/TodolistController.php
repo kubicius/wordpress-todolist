@@ -3,7 +3,8 @@ class TodolistController{
 
     public function __construct(){
         $this->viewDirectory = TODOLIST_PATH . "views/";
-        add_action( 'admin_menu', array ( $this , 'addMenuPage' ));
+        require '../Models/Todolist.php';
+        require '../Models/TodolistTask.php';
     }
 
     public function addMenuPage() {
@@ -16,6 +17,32 @@ class TodolistController{
             'dashicons-list-view',
             100
         );
+    }
+
+    public function activate(){
+        $todolistObj = new Todolist();
+        $todolistTaskObj = new TodolistTask();
+        $todolistObj->createTable();
+        $todolistTaskObj->createTable();
+    }
+
+    public function deactivate(){
+        $todolistObj = new Todolist();
+        $todolistTaskObj = new TodolistTask();
+        $todolistObj->dropTable();
+        $todolistTaskObj->dropTable();
+    }
+
+    public function addTodolist(string $name){
+
+    }
+
+    public function updateTodolist(int $id, string $name){
+
+    }
+
+    public function deleteTodolist(int $id){
+
     }
 
     public function show(){
