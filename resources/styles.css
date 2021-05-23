@@ -10,6 +10,7 @@
     box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
     background: #fff;
     margin: 20px;
+    height: fit-content;
 }
 
 .todolist__title{
@@ -31,6 +32,7 @@
     display: flex;
     padding: 8px 12px;
     align-items: center;
+    cursor: pointer;
 }
 
 .todolist__task:not(:last-of-type){
@@ -45,4 +47,16 @@
 
 .todolist__list input[type=checkbox]{
     margin: 0 15px 0 1px;
+}
+
+.todolist__list .dashicons{
+    transition: 0.2s all ease-in-out;
+}
+
+.todolist__list .dashicons-trash:hover{
+    color: rgb(167, 2, 2);
+}
+
+.todolist__list .dashicons-edit-large:hover{
+    color: rgb(0, 167, 0);
 }
