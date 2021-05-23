@@ -19,6 +19,8 @@ class TodolistController{
     }
 
     public function show(){
+        wp_enqueue_style( 'styles', '/wp-content/plugins/todolist/resources/styles.css', false, 1, 'all');
+        wp_enqueue_script( 'scripts', '/wp-content/plugins/todolist/resources/scripts.js', false, 1, true);
         require $this->viewDirectory . 'list.php';
     }
 
