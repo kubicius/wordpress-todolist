@@ -17,8 +17,8 @@ function updateTask(element){
     todolistTaskObj = new TodolistTask();
     id = getTaskId(element);
     let task = todolist.querySelector( '#todolist_task_' + id );
-    let checkbox = task.querySelector('.todolist__task-checkbox').value;
-    checkbox = checkbox == 'on' ? 1 : 0;
+    let checkbox = task.querySelector('.todolist__task-checkbox').checked;
+    checkbox = checkbox ? '1' : '0';
     let input = task.querySelector('.todolist__task-input--edit').value;
     todolistTaskObj.setId(id);
     todolistTaskObj.setDescription(input);
