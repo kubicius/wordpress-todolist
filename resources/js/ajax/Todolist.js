@@ -8,12 +8,17 @@ class Todolist{
         this.name = name;
     }
 
-    update(id, name){
+    add(){
         let request = new XMLHttpRequest();
     
     }
 
-    delete(id){
+    update(){
+        let request = new XMLHttpRequest();
+    
+    }
+
+    delete(){
         let request = new XMLHttpRequest();
         
     }

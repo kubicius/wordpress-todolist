@@ -39,7 +39,7 @@
     border-top: 1px solid #c3c4c7;
 }
 
-.todolist__taskTitle,
+.todolist__task-title,
 .todolist__list input[type=text]{
     width: 100%;
     font-size: 14px;

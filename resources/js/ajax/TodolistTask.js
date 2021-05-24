@@ -4,16 +4,27 @@ class TodolistTask{
         this.id = id;
     }
 
-    setName(name){
-        this.name = name;
+    setIdTodolist(idTodolist){
+        this.idTodolist = idTodolist;
     }
 
-    update(id, name){
+    setDescription(description){
+        this.description = description;
+    }
+
+    add(){
+        let request = new XMLHttpRequest();
+        request.open('POST', '/wp-admin/admin-ajax.php', false);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.send(['action=todolist_task_add&idTodolist=' + this.idTodolist + '&description=' + this.description]);
+    }
+
+    update(){
         let request = new XMLHttpRequest();
 
     }
 
-    delete(id){
+    delete(){
         let request = new XMLHttpRequest();
         
     }
