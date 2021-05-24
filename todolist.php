@@ -21,8 +21,8 @@ require TODOLIST_PATH . 'Classes/Models/TodolistTask.php';
 
 // Initialzation of controllers.
 require TODOLIST_PATH . 'Classes/Controllers/TodolistController.php';
-$todolistControllerObj = new TodolistController();
 require TODOLIST_PATH . 'Classes/Controllers/TodolistTaskController.php';
+$todolistControllerObj = new TodolistController();
 $todolistTaskControllerObj = new TodolistTaskController();
 
 // Hooks.

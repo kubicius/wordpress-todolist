@@ -16,14 +16,14 @@ class TodolistTaskController{
         $todolistTaskObj = new TodolistTask();
         $todolistTaskObj->setId($id);
         $todolistTaskObj->setDescription($description);
-        $todolistTaskObj->update();
+        echo json_encode($todolistTaskObj->update());
     }
 
     public function deleteTask(){
         $id = $_POST['id'];
         $todolistTaskObj = new TodolistTask();
         $todolistTaskObj->setId($id);
-        $todolistTaskObj->delete();
+        echo json_encode($todolistTaskObj->delete());
     }
 
 }

@@ -34,6 +34,7 @@ class TodolistTask{
             $sql .= "ID INT(11) UNSIGNED AUTO_INCREMENT, ";
             $sql .= "ID_todolist INT(11) UNSIGNED NOT NULL, ";
             $sql .= "description VARCHAR(128) NOT NULL, "; 
+            $sql .= "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "; 
             $sql .= "PRIMARY KEY (ID), ";
             $sql .= "CONSTRAINT FK_todolistTask_todolists FOREIGN KEY (ID_todolist) ";
             $sql .= "REFERENCES " . $this->db->prefix . "todolists (ID) ";
@@ -43,6 +44,13 @@ class TodolistTask{
             return dbDelta($sql);
         }
         return false;
+    }
+
+    public function dropTable(){
+        $sql = "ALTER TABLE " . $this->db->prefix . "todolist_tasks DROP FOREIGN KEY FK_todolistTask_todolists";
+        $this->db->query($sql);
+        $sql = "DROP TABLE IF EXISTS " . $this->tableName;
+        return $this->db->query($sql);
     }
 
     public function insert(){

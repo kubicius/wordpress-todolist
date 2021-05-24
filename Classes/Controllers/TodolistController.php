@@ -26,26 +26,28 @@ class TodolistController{
 
     public function deactivate(){
         $todolistObj = new Todolist();
+        $todolistTaskObj = new TodolistTask();
+        $todolistTaskObj->dropTable();
         $todolistObj->dropTable();
     }
 
     public function addTodolist(string $name){
         $todolistObj = new Todolist();
         $todolistObj->setName($name);
-        $todolistObj->insert();
+        echo json_encode($todolistObj->insert());
     }
 
     public function updateTodolist(int $id, string $name){
         $todolistObj = new Todolist();
         $todolistObj->setId($id);
         $todolistObj->setName($name);
-        $todolistObj->update();
+        echo json_encode($todolistObj->update());
     }
 
     public function deleteTodolist(int $id){
         $todolistObj = new Todolist();
         $todolistObj->setId($id);
-        $todolistObj->delete($id);
+        echo json_encode($todolistObj->delete($id));
     }
 
     public function show(){
@@ -56,7 +58,6 @@ class TodolistController{
 
         $todolistObj = new Todolist();
         $todolists = $todolistObj->selectAll();
-        var_dump($todolists);
         require $this->viewDirectory . 'list.php';
     }
 

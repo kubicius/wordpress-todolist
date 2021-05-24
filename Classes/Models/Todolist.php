@@ -33,6 +33,7 @@ class Todolist{
             $sql = "CREATE TABLE ". $this->tableName . " ( ";
             $sql .= "ID INT(11) UNSIGNED AUTO_INCREMENT, ";
             $sql .= "name VARCHAR(128) NOT NULL, "; 
+            $sql .= "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "; 
             $sql .= "PRIMARY KEY (ID)";
             $sql .= ") " . $charset_collate . ";";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
