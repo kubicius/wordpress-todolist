@@ -5,7 +5,7 @@ class TodolistTask{
     private $tableName;
     private $id;
     private $id_todolist;
-    private $name;
+    private $description;
 
     public function __construct(){
         global $wpdb;
@@ -21,8 +21,8 @@ class TodolistTask{
         $this->id_todolist = $idTodolist;
     }
 
-    public function setName(string $name){
-        $this->name = $name;
+    public function setDescription(string $description){
+        $this->description = $description;
     }
 
     public function createTable(){
@@ -33,7 +33,7 @@ class TodolistTask{
             $sql = "CREATE TABLE " . $this->tableName . " ( ";
             $sql .= "ID INT(11) UNSIGNED AUTO_INCREMENT, ";
             $sql .= "ID_todolist INT(11) UNSIGNED NOT NULL, ";
-            $sql .= "name VARCHAR(128) NOT NULL, "; 
+            $sql .= "description VARCHAR(128) NOT NULL, "; 
             $sql .= "PRIMARY KEY (ID), ";
             $sql .= "CONSTRAINT FK_todolistTask_todolists FOREIGN KEY (ID_todolist) ";
             $sql .= "REFERENCES " . $this->db->prefix . "todolists (ID) ";
@@ -49,7 +49,8 @@ class TodolistTask{
         return $this->db->insert(
             $this->tableName, 
             array(
-                'name' => $this->name
+                'id_todolist' => $this->id_todolist,
+                'description' => $this->description
             )
         );
     }
@@ -58,7 +59,7 @@ class TodolistTask{
         return $this->db->update( 
             $this->tableName, 
             array( 
-                'name' => $this->name
+                'description' => $this->description
             ), 
             array( 'ID' => $this->id )
         );
