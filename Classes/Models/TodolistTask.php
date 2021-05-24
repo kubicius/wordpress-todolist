@@ -40,17 +40,13 @@ class TodolistTask{
             $sql .= "ON DELETE CASCADE ";
             $sql .= ") " . $charset_collate . ";";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
-            dbDelta($sql);
+            return dbDelta($sql);
         }
-    }
-
-    public function dropTable(){
-        $sql = "DROP TABLE IF EXISTS " . $this->tableName;
-        $this->db->query($sql);
+        return false;
     }
 
     public function insert(){
-        $this->db->insert(
+        return $this->db->insert(
             $this->tableName, 
             array(
                 'name' => $this->name
@@ -59,7 +55,7 @@ class TodolistTask{
     }
 
     public function update(){
-        $this->db->update( 
+        return $this->db->update( 
             $this->tableName, 
             array( 
                 'name' => $this->name
@@ -69,7 +65,7 @@ class TodolistTask{
     }
 
     public function delete(){
-        $this->db->delete( $this->tableName, array( 'ID' => $this->id ) );
+        return $this->db->delete( $this->tableName, array( 'ID' => $this->id ) );
     }
 
 }

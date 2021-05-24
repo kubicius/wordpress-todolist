@@ -26,9 +26,7 @@ class TodolistController{
 
     public function deactivate(){
         $todolistObj = new Todolist();
-        $todolistTaskObj = new TodolistTask();
         $todolistObj->dropTable();
-        $todolistTaskObj->dropTable();
     }
 
     public function addTodolist(string $name){
@@ -53,6 +51,9 @@ class TodolistController{
     public function show(){
         wp_enqueue_style( 'styles', '/wp-content/plugins/todolist/resources/styles.css', false, 1, 'all');
         wp_enqueue_script( 'scripts', '/wp-content/plugins/todolist/resources/scripts.js', false, 1, true);
+        $todolistObj = new Todolist();
+        $todolists = $todolistObj->selectAll();
+        var_dump($todolists);
         require $this->viewDirectory . 'list.php';
     }
 

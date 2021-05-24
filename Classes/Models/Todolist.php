@@ -20,6 +20,11 @@ class Todolist{
         $this->name = $name;
     }
 
+    public function selectAll(){
+        $query = 'SELECT * FROM ' . $this->tableName . ' as t LEFT JOIN ' . $this->db->prefix . 'todolist_tasks' . ' as tt ON t.ID = tt.ID_todolist';
+        return $this->db->get_results( $query );
+    }
+
     public function createTable(){
         $charset_collate = $this->db->get_charset_collate();
 
@@ -31,17 +36,18 @@ class Todolist{
             $sql .= "PRIMARY KEY (ID)";
             $sql .= ") " . $charset_collate . ";";
             require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
-            dbDelta($sql);
+            return dbDelta($sql);
         }
+        return false;
     }
 
     public function dropTable(){
         $sql = "DROP TABLE IF EXISTS " . $this->tableName;
-        $this->db->query($sql);
+        return $this->db->query($sql);
     }
 
     public function insert(){
-        $this->db->insert(
+        return $this->db->insert(
             $this->tableName, 
             array(
                 'name' => $this->name
@@ -50,7 +56,7 @@ class Todolist{
     }
 
     public function update(){
-        $this->db->update( 
+        return $this->db->update( 
             $this->tableName, 
             array( 
                 'name' => $this->name
@@ -60,7 +66,7 @@ class Todolist{
     }
 
     public function delete(){
-        $this->db->delete( $this->tableName, array( 'ID' => $this->id ) );
+        return $this->db->delete( $this->tableName, array( 'ID' => $this->id ) );
     }
 
 }
