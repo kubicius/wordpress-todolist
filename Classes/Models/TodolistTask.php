@@ -25,6 +25,11 @@ class TodolistTask{
         $this->description = $description;
     }
 
+    public function selectByIdTodolist(int $idTodolist){
+        $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id_todolist = ' . $idTodolist;
+        return $this->db->get_results( $sql, ARRAY_A );
+    }
+
     public function createTable(){
         $charset_collate = $this->db->get_charset_collate();
 

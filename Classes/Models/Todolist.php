@@ -21,8 +21,8 @@ class Todolist{
     }
 
     public function selectAll(){
-        $query = 'SELECT * FROM ' . $this->tableName . ' as t LEFT JOIN ' . $this->db->prefix . 'todolist_tasks' . ' as tt ON t.ID = tt.ID_todolist';
-        return $this->db->get_results( $query );
+        $sql = 'SELECT * FROM ' . $this->tableName;
+        return $this->db->get_results( $sql, ARRAY_A );
     }
 
     public function createTable(){

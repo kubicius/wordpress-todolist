@@ -57,7 +57,13 @@ class TodolistController{
         wp_enqueue_script( 'listeners', '/wp-content/plugins/todolist/resources/js/listeners.js', false, 1, true);
 
         $todolistObj = new Todolist();
+        $todolistTaskObj = new TodolistTask();
         $todolists = $todolistObj->selectAll();
+        
+        foreach($todolists as $key => $todolist){
+            $todolists[$key]['tasks'] = $todolistTaskObj->selectByIdTodolist($todolist['ID']);
+        }
+
         require $this->viewDirectory . 'list.php';
     }
 
