@@ -1,19 +1,29 @@
 <?php
 class TodolistTaskController{
 
-    public function addTask(string $name){
+    public function addTask(){
+        $idTodolist = $_POST['idTodolist'];
+        $description = $_POST['description'];
         $todolistTaskObj = new TodolistTask();
-        $todolistTaskObj->insert($name);
+        $todolistTaskObj->setIdTodolist($idTodolist);
+        $todolistTaskObj->setDescription($description);
+        echo json_encode($todolistTaskObj->insert());
     }
 
-    public function updateTask(int $id, string $name){
+    public function updateTask(){
+        $id = $_POST['id'];
+        $description = $_POST['description'];
         $todolistTaskObj = new TodolistTask();
-        $todolistTaskObj->update($id, $name);
+        $todolistTaskObj->setId($id);
+        $todolistTaskObj->setDescription($description);
+        $todolistTaskObj->update();
     }
 
-    public function deleteTask(int $id){
+    public function deleteTask(){
+        $id = $_POST['id'];
         $todolistTaskObj = new TodolistTask();
-        $todolistTaskObj->delete($id);
+        $todolistTaskObj->setId($id);
+        $todolistTaskObj->delete();
     }
 
 }

@@ -30,31 +30,10 @@ add_action( 'admin_menu', array ( $todolistControllerObj , 'addMenuPage' ));
 register_activation_hook( __FILE__ , array ( $todolistControllerObj , 'activate' ));
 register_deactivation_hook( __FILE__ , array ( $todolistControllerObj , 'deactivate' ));
 
-// Routes.
-if( isset($_GET['controller']) && isset($_GET['action']) && isset($_POST) ){
-    if( $_GET['controller'] == 'todolist' ){
-        switch ( $_GET['action'] ){
-            case 'add' : 
-                return $todolistControllerObj->addTodolist( $_POST['name'] );
-            break;
-            case 'update' : 
-                return $todolistControllerObj->updateTodolist( $_POST['id'], $_POST['name'] );
-            break;
-            case 'delete' : 
-                return $todolistControllerObj->deleteTodolist( $_POST['id'] );
-            break;
-        }
-    }elseif( $_GET['controller'] == 'todolist-task' ){
-        switch ( $_GET['action'] ){
-            case 'add' : 
-                return $todolistTaskControllerObj->addTask( $_POST['name'] );
-            break;
-            case 'update' : 
-                return $todolistTaskControllerObj->updateTask( $_POST['id'], $_POST['name'] );
-            break;
-            case 'delete' : 
-                return $todolistTaskControllerObj->deleteTask( $_POST['id'] );
-            break;
-        }
-    }
-}
+add_action( 'wp_ajax_todolist_task_add', array ( $todolistTaskControllerObj , 'addTask' ));
+add_action( 'wp_ajax_todolist_task_update', array ( $todolistTaskControllerObj , 'updateTask' ));
+add_action( 'wp_ajax_todolist_task_delete', array ( $todolistTaskControllerObj , 'deleteTask' ));
+
+add_action( 'wp_ajax_todolist_add', array ( $todolistControllerObj , 'addTodolist' ));
+add_action( 'wp_ajax_todolist_update', array ( $todolistControllerObj , 'updateTodolist' ));
+add_action( 'wp_ajax_todolist_delete', array ( $todolistControllerObj , 'deleteTodolist' ));
