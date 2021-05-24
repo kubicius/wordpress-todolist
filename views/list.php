@@ -2,7 +2,7 @@
     <?php include $this->viewDirectory . 'header.php' ?>
     <div class="todolist__container">
         <?php foreach ($todolists as $todolist): ?>
-        <div class="todolist__list" id="todolist_1">
+        <div class="todolist__list" id="todolist_<?php echo $todolist['ID'] ?>">
             <div class="todolist__title">
                 <span><?php echo $todolist['name'] ?></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
             </div>
@@ -16,7 +16,7 @@
                 <span class="todolist__task-button--delete dashicons dashicons-trash"></span>
             </div>
             <?php foreach ($todolist['tasks'] as $task): ?>
-            <div class="todolist__task">
+            <div class="todolist__task" id="todolist_task_<?php echo $task['ID'] ?>">
                 <input type="checkbox">
                 <span class="todolist__task-title"><?php echo $task['description'] ?></span>
                 <span class="todolist__task-button--edit dashicons dashicons-edit-large"></span>
