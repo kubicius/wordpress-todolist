@@ -32,15 +32,22 @@ class TodolistController{
     }
 
     public function addTodolist(string $name){
-
+        $todolistObj = new Todolist();
+        $todolistObj->setName($name);
+        $todolistObj->insert();
     }
 
     public function updateTodolist(int $id, string $name){
-
+        $todolistObj = new Todolist();
+        $todolistObj->setId($id);
+        $todolistObj->setName($name);
+        $todolistObj->update();
     }
 
     public function deleteTodolist(int $id){
-
+        $todolistObj = new Todolist();
+        $todolistObj->setId($id);
+        $todolistObj->delete($id);
     }
 
     public function show(){
