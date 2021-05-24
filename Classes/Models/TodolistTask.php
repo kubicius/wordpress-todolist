@@ -6,6 +6,7 @@ class TodolistTask{
     private $id;
     private $id_todolist;
     private $description;
+    private $finished;
 
     public function __construct(){
         global $wpdb;
@@ -25,6 +26,10 @@ class TodolistTask{
         $this->description = $description;
     }
 
+    public function setFinished(int $finished){
+        $this->finished = $finished;
+    }
+
     public function selectByIdTodolist(int $idTodolist){
         $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE id_todolist = ' . $idTodolist;
         return $this->db->get_results( $sql, ARRAY_A );
@@ -39,6 +44,7 @@ class TodolistTask{
             $sql .= "ID INT(11) UNSIGNED AUTO_INCREMENT, ";
             $sql .= "ID_todolist INT(11) UNSIGNED NOT NULL, ";
             $sql .= "description VARCHAR(128) NOT NULL, "; 
+            $sql .= "finished TINYINT(1) NOT NULL DEFAULT 0, "; 
             $sql .= "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "; 
             $sql .= "PRIMARY KEY (ID), ";
             $sql .= "CONSTRAINT FK_todolistTask_todolists FOREIGN KEY (ID_todolist) ";
@@ -72,7 +78,8 @@ class TodolistTask{
         return $this->db->update( 
             $this->tableName, 
             array( 
-                'description' => $this->description
+                'description' => $this->description,
+                'finished' => $this->finished
             ), 
             array( 'ID' => $this->id )
         );

@@ -13,9 +13,11 @@ class TodolistTaskController{
     public function updateTask(){
         $id = $_POST['id'];
         $description = $_POST['description'];
+        $finished = $_POST['finished'];
         $todolistTaskObj = new TodolistTask();
         $todolistTaskObj->setId($id);
         $todolistTaskObj->setDescription($description);
+        $todolistTaskObj->setFinished($finished);
         echo json_encode($todolistTaskObj->update());
     }
 

@@ -11,14 +11,15 @@
             </div>
             <div class="todolist__task todolist__task--pattern" style="display:none;">
                 <input type="checkbox">
-                <input type="text" class="todolist__task-input--add" style="display:none;">
+                <input type="text" class="todolist__task-input--edit" style="display:none;">
                 <span class="todolist__task-button--edit dashicons dashicons-edit-large"></span>
                 <span class="todolist__task-button--delete dashicons dashicons-trash"></span>
             </div>
             <?php foreach ($todolist['tasks'] as $task): ?>
             <div class="todolist__task" id="todolist_task_<?php echo $task['ID'] ?>">
-                <input type="checkbox">
+                <input type="checkbox" class="todolist__task-checkbox" <? echo $task['finished'] == 1 ? 'checked' : '' ?>>
                 <span class="todolist__task-title"><?php echo $task['description'] ?></span>
+                <input type="text" class="todolist__task-input--edit" value="<?php echo $task['description'] ?>" style="display:none;">
                 <span class="todolist__task-button--edit dashicons dashicons-edit-large"></span>
                 <span class="todolist__task-button--delete dashicons dashicons-trash"></span>
             </div>

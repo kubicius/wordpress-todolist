@@ -12,6 +12,10 @@ class TodolistTask{
         this.description = description;
     }
 
+    setFinished(finished){
+        this.finished = finished;
+    }
+
     add(){
         let request = new XMLHttpRequest();
         request.open('POST', '/wp-admin/admin-ajax.php', false);
@@ -21,7 +25,9 @@ class TodolistTask{
 
     update(){
         let request = new XMLHttpRequest();
-
+        request.open('POST', '/wp-admin/admin-ajax.php', false);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.send(['action=todolist_task_update&id=' + this.id + '&description=' + this.description + '&finished=' + this.finished]);
     }
 
     delete(){

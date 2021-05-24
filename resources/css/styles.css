@@ -60,3 +60,7 @@
 .todolist__list .dashicons-edit-large:hover{
     color: rgb(0, 167, 0);
 }
+
+.todolist__task-checkbox:checked + .todolist__task-title{
+    text-decoration: line-through;
+}
