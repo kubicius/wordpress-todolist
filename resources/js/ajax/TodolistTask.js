@@ -21,6 +21,7 @@ class TodolistTask{
         request.open('POST', '/wp-admin/admin-ajax.php', false);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         request.send(['action=todolist_task_add&idTodolist=' + this.idTodolist + '&description=' + this.description]);
+        return JSON.parse(request.response);
     }
 
     update(){

@@ -7,7 +7,9 @@ class TodolistTaskController{
         $todolistTaskObj = new TodolistTask();
         $todolistTaskObj->setIdTodolist($idTodolist);
         $todolistTaskObj->setDescription($description);
+        header('Content-type: application/json');
         echo json_encode($todolistTaskObj->insert());
+        die();
     }
 
     public function updateTask(){

@@ -1,9 +1,24 @@
 function todolistAddTask(element){
-    todolistTaskObj = new TodolistTask();
-    idTodolist = todolistGetListId(element);
+    let todolistTaskObj = new TodolistTask();
+    let idTodolist = todolistGetListId(element);
+    let description = element.value;
     todolistTaskObj.setIdTodolist(idTodolist);
-    todolistTaskObj.setDescription(element.value);
-    todolistTaskObj.add();
+    todolistTaskObj.setDescription(description);
+    let response = todolistTaskObj.add();
+    if(response.id != undefined){
+        element.value = '';
+        let list = todolist.querySelector('#todolist_' + idTodolist);
+        let pattern = todolist.querySelector('.todolist__task--pattern');
+        list.appendChild(pattern);
+        let newTask = list.querySelector('.todolist__task--pattern');
+        newTask.classList.remove('.todolist__task--pattern');
+        newTask.querySelector('.todolist__task-title').innerHTML = description;
+        newTask.querySelector('.todolist__task-input--edit').value = description;
+        newTask.style.display = "flex";
+        newTask.id = 'todolist_task_' + response.id;
+    }else{
+        todolistShowError('Error during task adding.');
+    }
 }
 
 function todolistDeleteTask(element){
@@ -11,6 +26,8 @@ function todolistDeleteTask(element){
     let id = todolistGetTaskId(element);
     todolistTaskObj.setId(id);
     todolistTaskObj.delete();
+    let task = todolist.querySelector('#todolist_task_' + id);
+    task.remove();
 }
 
 function todolistUpdateTask(element){
@@ -57,6 +74,10 @@ function todolistGetTaskId(element){
     let id = element.closest('.todolist__task').id;
     id = id.substring(id.lastIndexOf("_") + 1);
     return id;
+}
+
+function todolistShowError(string){
+    alert(string);
 }
 
 const todolist = document.querySelector('.todolist');

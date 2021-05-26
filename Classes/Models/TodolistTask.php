@@ -65,13 +65,14 @@ class TodolistTask{
     }
 
     public function insert(){
-        return $this->db->insert(
+        $this->db->insert(
             $this->tableName, 
             array(
                 'id_todolist' => $this->id_todolist,
                 'description' => $this->description
             )
         );
+        return ['id' => $this->db->insert_id];
     }
 
     public function update(){
