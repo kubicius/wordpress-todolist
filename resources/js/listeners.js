@@ -17,7 +17,7 @@ todolist.addEventListener('click', function (event){
     }
 
     if(event.target.classList.contains('todolist__task-button--edit')) {
-        todolistShowInput(event.target)
+        todolistShowTaskInput(event.target)
     }
 
     if(event.target.classList.contains('todolist__task-title')) {
@@ -27,6 +27,16 @@ todolist.addEventListener('click', function (event){
 
 // Lists.
 todolist.querySelector('.todolist__list--new').addEventListener( "click", todolistAddList );
+
+todolist.addEventListener('click', function (event){
+    if(event.target.classList.contains('todolist__button--delete')) {
+        todolistDeleteList(event.target);
+    }
+
+    if(event.target.classList.contains('todolist__button--edit')) {
+        todolistShowListInput(event.target);
+    }
+});
 
 function todolistAddTask(element){
     let todolistTaskObj = new TodolistTask();
@@ -64,6 +74,19 @@ function todolistDeleteTask(element){
     }
 }
 
+function todolistDeleteList(element){
+    let todolistObj = new Todolist();
+    let id = todolistGetListId(element);
+    todolistObj.setId(id);
+    let response = todolistObj.delete();
+    if(response == 1){
+        let list = todolist.querySelector('#todolist_' + id);
+        list.remove();
+    }else{
+        todolistShowError('Error occured during deleting list.');
+    }
+}
+
 function todolistUpdateTask(element){
     let todolistTaskObj = new TodolistTask();
     let id = todolistGetTaskId(element);
@@ -84,7 +107,7 @@ function todolistUpdateTask(element){
     }
 }
 
-function todolistShowInput(element){
+function todolistShowTaskInput(element){
     let id = todolistGetTaskId(element);
     let task = todolist.querySelector('#todolist_task_' + id);
     let input = task.querySelector('.todolist__task-input--edit');
@@ -137,26 +160,29 @@ function todolistAddList(){
     this.style.display = 'none';
 
     let titleEdit = newList.querySelector('.todolist__title--edit');
+    newList.classList.remove('todolist__list--new');
     newList.querySelector('.todolist__title--new').remove();
     titleEdit.style.display = 'flex';
 
     let input = titleEdit.querySelector('input');
     let listAdd = this;
+
     input.addEventListener( "change", function(){
+        titleEdit.style.display = 'none';
         let todolistObj = new Todolist();
         todolistObj.setName(this.value);
-        titleEdit.style.display = 'none';
+
         let response = todolistObj.add();
         if(response.id != undefined){
             let title = newList.querySelector('.todolist__title');
             title.querySelector('.todolist__title-text').innerHTML = this.value;
+            newList.querySelector('.todolist__task--add').style.display = 'flex';
             title.style.display = 'flex';
             newList.id = "todolist_" + response.id;
-            newList.querySelector('.todolist__task--add').style.display = 'flex';
         }else{
             newList.remove();
             todolistShowError('Error occured during creating list.');
         }
-        listAdd.style.display = 'flex';
+        listAdd.style.display = 'block';
     });
 }

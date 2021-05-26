@@ -23,17 +23,21 @@ class TodolistController extends Controller{
         }
     }
 
-    public function updateTodolist(int $id, string $name){
-        $todolistObj = new Todolist();
-        $todolistObj->setId($id);
-        $todolistObj->setName($name);
-        $this->respond($todolistObj->update());
+    public function updateTodolist(){
+        if(isset($_POST['id']) && isset($_POST['name'])){
+            $todolistObj = new Todolist();
+            $todolistObj->setId($_POST['id']);
+            $todolistObj->setName($_POST['name']);
+            $this->respond($todolistObj->update());
+        }
     }
 
-    public function deleteTodolist(int $id){
-        $todolistObj = new Todolist();
-        $todolistObj->setId($id);
-        $this->respond($todolistObj->delete($id));
+    public function deleteTodolist(){
+        if(isset($_POST['id'])){
+            $todolistObj = new Todolist();
+            $todolistObj->setId($_POST['id']);
+            $this->respond($todolistObj->delete());
+        }
     }
 
     public function show(){

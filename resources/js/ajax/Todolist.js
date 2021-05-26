@@ -24,8 +24,13 @@ class Todolist{
     }
 
     delete(){
-        let request = new XMLHttpRequest();
-        
+        if(this.id != undefined){
+            let request = new XMLHttpRequest();
+            request.open('POST', '/wp-admin/admin-ajax.php', false);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            request.send(['action=todolist_delete&id=' + this.id]);
+            return JSON.parse(request.response);
+        }
     }
     
 }

@@ -38,8 +38,8 @@
             </div>
             <div class="todolist__task todolist__task--pattern" style="display:none;">
                 <input type="checkbox" class="todolist__task-checkbox">
-                <input type="text" class="todolist__task-input--edit" style="display:none;">
                 <span class="todolist__task-title"></span>
+                <input type="text" class="todolist__task-input--edit" style="display:none;">
                 <span class="todolist__task-button--edit dashicons dashicons-edit-large"></span>
                 <span class="todolist__task-button--delete dashicons dashicons-trash"></span>
             </div>
