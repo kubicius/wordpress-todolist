@@ -19,8 +19,14 @@ class Todolist{
     }
 
     update(){
-        let request = new XMLHttpRequest();
-    
+        if(this.id != undefined && this.name != undefined){
+            let request = new XMLHttpRequest();
+            request.open('POST', '/wp-admin/admin-ajax.php', false);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+            request.send(['action=todolist_update&id=' + this.id + '&name=' + this.name]);
+            return JSON.parse(request.response);
+        }
+        return false;
     }
 
     delete(){

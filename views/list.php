@@ -4,10 +4,10 @@
         <?php foreach ($todolists as $todolist): ?>
         <div class="todolist__list" id="todolist_<?php echo $todolist['ID'] ?>">
             <div class="todolist__title">
-                <span class="todolist__title-text"><?php echo $todolist['name'] ?></span><span class="todolist__task-button--edit dashicons dashicons-edit-large"></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
+                <span class="todolist__title-text"><?php echo $todolist['name'] ?></span><span class="todolist__button--edit dashicons dashicons-edit-large"></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
             </div>
             <div class="todolist__title--edit"  style="display: none;">
-                <input type="text" value="<?php echo $todolist['name'] ?>" style="display:none;">
+                <input class="todolist__title-input" type="text" value="<?php echo $todolist['name'] ?>">
             </div>
             <div class="todolist__task todolist__task--add">
                 <input type="text" placeholder="Add task" class="todolist__task-input--add">
@@ -28,10 +28,10 @@
             <span>New list</span><span class="dashicons dashicons-plus-alt"></span>
             </div>
             <div class="todolist__title"  style="display: none;">
-                <span class="todolist__title-text"></span><span class="todolist__task-button--edit dashicons dashicons-edit-large"></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
+                <span class="todolist__title-text"></span><span class="todolist__button--edit dashicons dashicons-edit-large"></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
             </div>
             <div class="todolist__title--edit"  style="display: none;">
-                <input type="text" placeholder="Title">
+                <input class="todolist__title-input" type="text" placeholder="Title">
             </div>
             <div class="todolist__task todolist__task--add" style="display: none;">
                 <input type="text" placeholder="Add task" class="todolist__task-input--add">
