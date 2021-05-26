@@ -64,6 +64,19 @@ function todolistHideInput(element){
     text.style.display = "inline";
 }
 
+function todolistToggleCheckbox(element){
+    todolistTaskObj = new TodolistTask();
+    let id = todolistGetTaskId(element);
+    let task = todolist.querySelector( '#todolist_task_' + id );
+    let checkbox = task.querySelector('.todolist__task-checkbox');
+    if(checkbox.checked){
+        checkbox.checked = false;
+    }else{
+        checkbox.checked = true;
+    }
+    todolistUpdateTask(element);
+}
+
 function todolistGetListId(element){
     let id = element.closest('.todolist__list').id;
     id = id.substring(id.lastIndexOf("_") + 1);
@@ -87,3 +100,4 @@ todolist.querySelectorAll('.todolist__task-checkbox').forEach(element => element
 todolist.querySelectorAll('.todolist__task-input--edit').forEach(element => element.addEventListener( "change", () => todolistUpdateTask(element) ));
 todolist.querySelectorAll('.todolist__task-button--delete').forEach(element => element.addEventListener( "click", () => todolistDeleteTask(element) ));
 todolist.querySelectorAll('.todolist__task-button--edit').forEach(element => element.addEventListener( "click", () => todolistShowInput(element) ));
+todolist.querySelectorAll('.todolist__task-title').forEach(element => element.addEventListener( "click", () => todolistToggleCheckbox(element) ));
