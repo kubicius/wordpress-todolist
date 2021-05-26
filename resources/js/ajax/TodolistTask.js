@@ -29,6 +29,7 @@ class TodolistTask{
         request.open('POST', '/wp-admin/admin-ajax.php', false);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         request.send(['action=todolist_task_update&id=' + this.id + '&description=' + this.description + '&finished=' + this.finished]);
+        return JSON.parse(request.response);
     }
 
     delete(){
@@ -36,6 +37,7 @@ class TodolistTask{
         request.open('POST', '/wp-admin/admin-ajax.php', false);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         request.send(['action=todolist_task_delete&id=' + this.id]);
+        return JSON.parse(request.response);
     }
     
 }
