@@ -48,12 +48,13 @@ class Todolist{
     }
 
     public function insert(){
-        return $this->db->insert(
+        $this->db->insert(
             $this->tableName, 
             array(
                 'name' => $this->name
             )
         );
+        return ['id' => $this->db->insert_id];
     }
 
     public function update(){

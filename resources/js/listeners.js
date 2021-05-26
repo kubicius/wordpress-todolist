@@ -1,3 +1,33 @@
+const todolist = document.querySelector('.todolist');
+
+// Tasks.
+todolist.addEventListener('change', function (event){
+    if(event.target.classList.contains('todolist__task-input--add')) {
+        todolistAddTask(event.target)
+    }
+
+    if(event.target.classList.contains('todolist__task-input--edit') || event.target.classList.contains('todolist__task-checkbox')) {
+        todolistUpdateTask(event.target)
+    }
+});
+
+todolist.addEventListener('click', function (event){
+    if(event.target.classList.contains('todolist__task-button--delete')) {
+        todolistDeleteTask(event.target)
+    }
+
+    if(event.target.classList.contains('todolist__task-button--edit')) {
+        todolistShowInput(event.target)
+    }
+
+    if(event.target.classList.contains('todolist__task-title')) {
+        todolistToggleCheckbox(event.target)
+    }
+});
+
+// Lists.
+todolist.querySelector('.todolist__list--new').addEventListener( "click", todolistAddList );
+
 function todolistAddTask(element){
     let todolistTaskObj = new TodolistTask();
     let idTodolist = todolistGetListId(element);
@@ -17,7 +47,7 @@ function todolistAddTask(element){
         newTask.style.display = "flex";
         newTask.id = 'todolist_task_' + response.id;
     }else{
-        todolistShowError('Error during task adding.');
+        todolistShowError('Error occured during adding task.');
     }
 }
 
@@ -25,30 +55,38 @@ function todolistDeleteTask(element){
     let todolistTaskObj = new TodolistTask();
     let id = todolistGetTaskId(element);
     todolistTaskObj.setId(id);
-    todolistTaskObj.delete();
-    let task = todolist.querySelector('#todolist_task_' + id);
-    task.remove();
+    let response = todolistTaskObj.delete();
+    if(response == 1){
+        let task = todolist.querySelector('#todolist_task_' + id);
+        task.remove();
+    }else{
+        todolistShowError('Error occured during deleting task.');
+    }
 }
 
 function todolistUpdateTask(element){
-    todolistTaskObj = new TodolistTask();
+    let todolistTaskObj = new TodolistTask();
     let id = todolistGetTaskId(element);
-    let task = todolist.querySelector( '#todolist_task_' + id );
+    let task = todolist.querySelector('#todolist_task_' + id);
     let checkbox = task.querySelector('.todolist__task-checkbox').checked;
     checkbox = checkbox ? '1' : '0';
     let description = task.querySelector('.todolist__task-input--edit').value;
     todolistTaskObj.setId(id);
     todolistTaskObj.setDescription(description);
     todolistTaskObj.setFinished(checkbox);
-    todolistTaskObj.update();
-    todolistHideInput(element);
-    let text = task.querySelector('.todolist__task-title');
-    text.innerHTML = description;
+    let response = todolistTaskObj.update();
+    if(response == 1){
+        todolistHideInput(element);
+        let text = task.querySelector('.todolist__task-title');
+        text.innerHTML = description;
+    }else{
+        todolistShowError('Error occured during updating task.');
+    }
 }
 
 function todolistShowInput(element){
     let id = todolistGetTaskId(element);
-    let task = todolist.querySelector( '#todolist_task_' + id );
+    let task = todolist.querySelector('#todolist_task_' + id);
     let input = task.querySelector('.todolist__task-input--edit');
     let text = task.querySelector('.todolist__task-title');
     input.style.display = "inline";
@@ -65,9 +103,8 @@ function todolistHideInput(element){
 }
 
 function todolistToggleCheckbox(element){
-    todolistTaskObj = new TodolistTask();
     let id = todolistGetTaskId(element);
-    let task = todolist.querySelector( '#todolist_task_' + id );
+    let task = todolist.querySelector('#todolist_task_' + id);
     let checkbox = task.querySelector('.todolist__task-checkbox');
     if(checkbox.checked){
         checkbox.checked = false;
@@ -93,11 +130,33 @@ function todolistShowError(string){
     alert(string);
 }
 
-const todolist = document.querySelector('.todolist');
+function todolistAddList(){
+    let container = todolist.querySelector('.todolist__container');
+    let newList = this.cloneNode(true)
+    container.append(newList, container.lastElementChild);
+    this.style.display = 'none';
 
-todolist.querySelectorAll('.todolist__task-input--add').forEach(element => element.addEventListener( "change", () => todolistAddTask(element) ));
-todolist.querySelectorAll('.todolist__task-checkbox').forEach(element => element.addEventListener( "change", () => todolistUpdateTask(element) ));
-todolist.querySelectorAll('.todolist__task-input--edit').forEach(element => element.addEventListener( "change", () => todolistUpdateTask(element) ));
-todolist.querySelectorAll('.todolist__task-button--delete').forEach(element => element.addEventListener( "click", () => todolistDeleteTask(element) ));
-todolist.querySelectorAll('.todolist__task-button--edit').forEach(element => element.addEventListener( "click", () => todolistShowInput(element) ));
-todolist.querySelectorAll('.todolist__task-title').forEach(element => element.addEventListener( "click", () => todolistToggleCheckbox(element) ));
+    let titleEdit = newList.querySelector('.todolist__title--edit');
+    newList.querySelector('.todolist__title--new').remove();
+    titleEdit.style.display = 'flex';
+
+    let input = titleEdit.querySelector('input');
+    let listAdd = this;
+    input.addEventListener( "change", function(){
+        let todolistObj = new Todolist();
+        todolistObj.setName(this.value);
+        titleEdit.style.display = 'none';
+        let response = todolistObj.add();
+        if(response.id != undefined){
+            let title = newList.querySelector('.todolist__title');
+            title.querySelector('.todolist__title-text').innerHTML = this.value;
+            title.style.display = 'flex';
+            newList.id = "todolist_" + response.id;
+            newList.querySelector('.todolist__task--add').style.display = 'flex';
+        }else{
+            newList.remove();
+            todolistShowError('Error occured during creating list.');
+        }
+        listAdd.style.display = 'flex';
+    });
+}

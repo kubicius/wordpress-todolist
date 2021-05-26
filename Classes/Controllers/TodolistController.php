@@ -15,23 +15,25 @@ class TodolistController extends Controller{
         $todolistObj->dropTable();
     }
 
-    public function addTodolist(string $name){
-        $todolistObj = new Todolist();
-        $todolistObj->setName($name);
-        echo json_encode($todolistObj->insert());
+    public function addTodolist(){
+        if(isset($_POST['name'])){
+            $todolistObj = new Todolist();
+            $todolistObj->setName($_POST['name']);
+            $this->respond($todolistObj->insert());
+        }
     }
 
     public function updateTodolist(int $id, string $name){
         $todolistObj = new Todolist();
         $todolistObj->setId($id);
         $todolistObj->setName($name);
-        echo json_encode($todolistObj->update());
+        $this->respond($todolistObj->update());
     }
 
     public function deleteTodolist(int $id){
         $todolistObj = new Todolist();
         $todolistObj->setId($id);
-        echo json_encode($todolistObj->delete($id));
+        $this->respond($todolistObj->delete($id));
     }
 
     public function show(){
