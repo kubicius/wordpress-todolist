@@ -31,7 +31,8 @@
                 <span class="todolist__title-text"></span><span class="todolist__button--edit dashicons dashicons-edit-large"></span><span class="todolist__button--delete dashicons dashicons-trash"></span>
             </div>
             <div class="todolist__title--edit"  style="display: none;">
-                <input class="todolist__title-input" type="text" placeholder="Title">
+                <input class="todolist__title-input--new" type="text" placeholder="Title">
+                <input class="todolist__title-input" type="text" placeholder="Title" style="display: none;">
             </div>
             <div class="todolist__task todolist__task--add" style="display: none;">
                 <input type="text" placeholder="Add task" class="todolist__task-input--add">

@@ -39,7 +39,7 @@ todolist.addEventListener('click', function (event){
 });
 
 todolist.addEventListener('change', function (event){
-    if(event.target.classList.contains('todolist__title-input')) {
+    if(event.target.classList.contains('todolist__title-input') && !event.target.classList.contains('todolist__title-input--new')) {
         todolistUpdateList(event.target)
     }
 });
@@ -78,7 +78,7 @@ function todolistAddList(){
     newList.querySelector('.todolist__title--new').remove();
     titleEdit.style.display = 'flex';
 
-    let input = titleEdit.querySelector('.todolist__title-input');
+    let input = titleEdit.querySelector('.todolist__title-input--new');
     let listAdd = this;
 
     input.addEventListener( "change", function(){
@@ -90,9 +90,13 @@ function todolistAddList(){
         if(response.id != undefined){
             let title = newList.querySelector('.todolist__title');
             title.querySelector('.todolist__title-text').innerHTML = this.value;
+            let inputEdit = newList.querySelector('.todolist__title-input');
+            inputEdit.value = this.value;
+            inputEdit.style.display = 'flex';
             newList.querySelector('.todolist__task--add').style.display = 'flex';
             title.style.display = 'flex';
             newList.id = "todolist_" + response.id;
+            input.remove();
         }else{
             newList.remove();
             todolistShowError('Error occured during creating list.');
