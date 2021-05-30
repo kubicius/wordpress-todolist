@@ -44,9 +44,14 @@
     cursor: pointer;
 }
 
+.todolist__task-title{
+    line-break: anywhere;
+}
+
 .todolist__task-title,
 .todolist__list input[type=text]{
-    width: 100%;
+    width: 100vw;
+    max-width: 100%;
     font-size: 14px;
     border: 0;
 }
