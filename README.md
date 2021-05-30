@@ -1,7 +1,7 @@
 # WordPress To Do List
 Simple to-do list meant to be used via administration panel.
 ## Installation
-Put all files from repository into the wp-content/plugins/todolist catalog. 
+Put all files from the repository into the wp-content/plugins/todolist catalog. 
 ## Features
 Plugin adds to-do list functionality that can be reachable via To Do list in the administration panel.
 This way is opened one view that contains multiple lists and tasks.
