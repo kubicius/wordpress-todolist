@@ -4,13 +4,14 @@
 
 .todolist__list{
     position: relative;
-    width: 350px;
+    min-width: 250px;
     max-width: 100%;
     border: 1px solid #c3c4c7;
     box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
-    background: #fff;
-    margin: 20px;
+    background-color: #f6f6f6;
+    margin: 10px;
     height: fit-content;
+    border-radius: 5px;
 }
 
 .todolist__title{
@@ -19,8 +20,12 @@
     justify-content: space-between;
 }
 
-.todolist__title + .todolist__task{
-    border-top: 1px solid #c3c4c7;
+.todolist__task,
+.todolist__title--edit{
+    border: 1px solid #c3c4c7;
+    border-radius: 5px;
+    margin: 4px;
+    background-color: #fff;
 }
 
 .todolist__title span:first-of-type{
@@ -39,14 +44,11 @@
     cursor: pointer;
 }
 
-.todolist__task + .todolist__task{
-    border-top: 1px solid #c3c4c7;
-}
-
 .todolist__task-title,
 .todolist__list input[type=text]{
     width: 100%;
     font-size: 14px;
+    border: 0;
 }
 
 .todolist__list input[type=checkbox]{
@@ -67,4 +69,8 @@
 
 .todolist__task-checkbox:checked + .todolist__task-title{
     text-decoration: line-through;
+}
+
+.todolist__task-button--edit{
+    margin-left: 15px;
 }
