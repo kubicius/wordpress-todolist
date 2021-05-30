@@ -11,4 +11,6 @@ Tasks also could be marked as completed.
 - Drag and drop position changing
 - Widget that will allow to pinup one of the to-do lists to the dashboard
 - Reducing visibility of the input lag
-- Delete confirmation and error box
+- Delete confirmation
+- Styled error box
+- Different language versions
