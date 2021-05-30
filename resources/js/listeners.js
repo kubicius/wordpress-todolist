@@ -151,16 +151,21 @@ if(typeof todolist != undefined){
         let checkbox = task.querySelector('.todolist__task-checkbox').checked;
         checkbox = checkbox ? '1' : '0';
         let description = task.querySelector('.todolist__task-input--edit').value;
-        todolistTaskObj.setId(id);
-        todolistTaskObj.setDescription(description);
-        todolistTaskObj.setFinished(checkbox);
-        let response = todolistTaskObj.update();
-        if(response == 1){
-            todolistHideTaskInput(element);
-            let text = task.querySelector('.todolist__task-title');
-            text.innerHTML = description;
+        let length = description.length;
+        if(length != 0){
+            todolistTaskObj.setId(id);
+            todolistTaskObj.setDescription(description);
+            todolistTaskObj.setFinished(checkbox);
+            let response = todolistTaskObj.update();
+            if(response == 1){
+                todolistHideTaskInput(element);
+                let text = task.querySelector('.todolist__task-title');
+                text.innerHTML = description;
+            }else{
+                todolistShowError('Error occured during updating task.');
+            }
         }else{
-            todolistShowError('Error occured during updating task.');
+            todolistShowError('Task description can\'t be empty.');
         }
     }
 
@@ -169,15 +174,20 @@ if(typeof todolist != undefined){
         let id = todolistGetListId(element);
         let list = todolist.querySelector('#todolist_' + id);
         let name = element.value;
-        todolistObj.setId(id);
-        todolistObj.setName(name);
-        let response = todolistObj.update();
-        if(response == 1){
-            todolistHideListInput(element);
-            let text = list.querySelector('.todolist__title-text');
-            text.innerHTML = name;
+        let length = name.length;
+        if(length != 0){
+            todolistObj.setId(id);
+            todolistObj.setName(name);
+            let response = todolistObj.update();
+            if(response == 1){
+                todolistHideListInput(element);
+                let text = list.querySelector('.todolist__title-text');
+                text.innerHTML = name;
+            }else{
+                todolistShowError('Error occured during updating list.');
+            }
         }else{
-            todolistShowError('Error occured during updating list.');
+            todolistShowError('Title can\'t be empty.');
         }
     }
 
