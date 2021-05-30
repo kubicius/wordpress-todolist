@@ -2,6 +2,12 @@
     display: flex;
 }
 
+@media(max-width: 1023px){
+    .todolist__container{
+        flex-direction: column;
+    }
+}
+
 .todolist__list{
     position: relative;
     min-width: 250px;
