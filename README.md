@@ -1,7 +1,7 @@
 # WordPress To Do List
 Simple to-do list meant to be used via administration panel.
 ## Installation
-Use WordPress plugin install manager or extract files from the release into the wp-content/plugins/catalog. 
+Install .zip from the latest release using WordPress plugin install manager or extract it into the wp-content/plugins/catalog. 
 ## Features
 Plugin adds to-do list functionality that can be reachable via To Do list in the administration panel.
 This way is opened one view that contains multiple lists and tasks.
