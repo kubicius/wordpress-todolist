@@ -12,3 +12,4 @@ Tasks also could be marked as completed.
 - Widget that will allow to pinup one of the to-do lists to the dashboard
 - Reducing visibility of the input lag
 - Delete confirmation and error box
+- Different language versions
