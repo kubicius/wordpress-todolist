@@ -3,7 +3,7 @@
 * Plugin Name: Todo list
 * Plugin URI: https://github.com/kubicius/wordpress-todo-list
 * Description: To-do list.
-* Version: 1
+* Version: 1.0
 * Author: Krzysztof Kubicius
 * Author URI: https://kubicius.eu
 **/
