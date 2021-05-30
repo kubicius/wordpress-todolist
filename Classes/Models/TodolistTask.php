@@ -43,7 +43,7 @@ class TodolistTask{
             $sql = "CREATE TABLE " . $this->tableName . " ( ";
             $sql .= "ID INT(11) UNSIGNED AUTO_INCREMENT, ";
             $sql .= "ID_todolist INT(11) UNSIGNED NOT NULL, ";
-            $sql .= "description VARCHAR(128) NOT NULL, "; 
+            $sql .= "description VARCHAR(1024) NOT NULL, "; 
             $sql .= "finished TINYINT(1) NOT NULL DEFAULT 0, "; 
             $sql .= "created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "; 
             $sql .= "PRIMARY KEY (ID), ";
